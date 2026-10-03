@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Di choi voi anh nhe?</title>
+  <meta name="description" content="Mot loi moi dac biet danh rieng cho em" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- STEP 1 -->
+  <section class="step active" id="step-1">
+    <div class="step-inner">
+      <h1 class="main-title" id="title-step1">Em oi di choi voi anh nhe bay biii</h1>
+      <div class="btn-group" id="btns-step1">
+        <button class="btn btn-yes" id="btn-yes" onclick="goTo(2)">Dong y</button>
+        <button class="btn btn-no" id="btn-no" onmouseover="runAway(this)" onclick="catchedNo()">Em hong chiu dau</button>
+      </div>
+      <div class="cat-container">
+        <img src="assets/cat_pleeease.gif" alt="Meo xin xo" class="cat-gif" id="cat-gif" />
+        <p class="cat-caption">PLEEEASE</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 2 -->
+  <section class="step" id="step-2">
+    <div class="step-inner">
+      <h2 class="main-title">Thenn Kiuuuu</h2>
+      <div class="video-card">
+        <img src="assets/step2_meme.gif" alt="Meme thank you" class="meme-video" />
+      </div>
+      <p class="subtitle">Bat ngo chua cuc cung</p>
+      <button class="btn btn-next" id="btn-step2-next" onclick="goTo(3)">An o day ne bee UWU</button>
+    </div>
+  </section>
+
+  <!-- STEP 3 -->
+  <section class="step" id="step-3">
+    <div class="step-inner">
+      <h2 class="main-title">Chon ngay di neee</h2>
+      <p class="subtitle">Ngay nao em ranh thi bao anh nha</p>
+      <div class="calendar-wrapper">
+        <div class="calendar-header">
+          <button class="cal-nav" id="btn-prev-month" onclick="changeMonth(-1)">&#8249;</button>
+          <span class="cal-month-year" id="cal-month-year">Thang 10, 2026</span>
+          <button class="cal-nav" id="btn-next-month" onclick="changeMonth(1)">&#8250;</button>
+        </div>
+        <div class="cal-weekdays">
+          <span>CN</span><span>T2</span><span>T3</span><span>T4</span><span>T5</span><span>T6</span><span>T7</span>
+        </div>
+        <div class="cal-days" id="cal-days"></div>
+      </div>
+      <p class="selected-date-display" id="selected-date-display">Chua chon ngay nao</p>
+      <button class="btn btn-next" id="btn-step3-next" onclick="goTo(4)" disabled>Tiep theo</button>
+    </div>
+  </section>
+
+  <!-- STEP 4: Dia chi don em -->
+  <section class="step" id="step-4">
+    <div class="step-inner">
+      <h2 class="main-title">Anh don em o dau nee?</h2>
+      <p class="subtitle">Dien dia chi cu the de anh biet cho don em nha</p>
+
+      <div class="address-card">
+        <div class="address-icon">&#128205;</div>
+        <div class="address-input-wrap">
+          <textarea
+            id="address-input"
+            class="address-textarea"
+            placeholder="Vi du: 123 Nguyen Trai, P. Ben Thanh, Q.1, TP.HCM..."
+            rows="3"
+            maxlength="200"
+            oninput="validateAddress()"
+            onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();submitAddress();}"
+          ></textarea>
+          <div class="address-counter"><span id="addr-count">0</span>/200</div>
+        </div>
+        <div class="address-error" id="address-error"></div>
+      </div>
+
+      <button class="btn btn-next" id="btn-step4-next" onclick="submitAddress()" disabled>Xac nhan dia chi</button>
+    </div>
+  </section>
+
+  <!-- STEP 5 (was 4) -->
+  <section class="step" id="step-5">
+    <div class="step-inner">
+      <h2 class="main-title">Lua mon ma em thich diii naaa?</h2>
+      <div class="circle-grid" id="food-grid">
+        <div class="circle-item" data-val="Banh trang tron">
+          <label class="circle-label" for="food-1">
+            <input type="checkbox" id="food-1" class="circle-check" />
+            <div class="circle-img-wrap"><img src="assets/food_banh_trang_tron.png" alt="Banh trang tron" /><div class="check-overlay">&#10003;</div></div>
+          </label>
+          <span class="item-name">Banh trang tron</span>
+        </div>
+        <div class="circle-item" data-val="Ca vien chien">
+          <label class="circle-label" for="food-2">
+            <input type="checkbox" id="food-2" class="circle-check" />
+            <div class="circle-img-wrap"><img src="assets/food_ca_vien_chien.png" alt="Ca vien chien" /><div class="check-overlay">&#10003;</div></div>
+          </label>
+          <span class="item-name">Ca vien chien</span>
+        </div>
+        <div class="circle-item" data-val="My cayy">
+          <label class="circle-label" for="food-4">
+            <input type="checkbox" id="food-4" class="circle-check" />
+            <div class="circle-img-wrap"><img src="assets/food_my_cay.png" alt="My cayy" /><div class="check-overlay">&#10003;</div></div>
+          </label>
+          <span class="item-name">My cayy</span>
+        </div>
+        <div class="circle-item" data-val="Lau thai">
+          <label class="circle-label" for="food-6">
+            <input type="checkbox" id="food-6" class="circle-check" />
+            <div class="circle-img-wrap"><img src="assets/food_lau_thai.png" alt="Lau thai" /><div class="check-overlay">&#10003;</div></div>
+          </label>
+          <span class="item-name">Lau thai</span>
+        </div>
+        <div class="circle-item" data-val="Ga ran">
+          <label class="circle-label" for="food-7">
+            <input type="checkbox" id="food-7" class="circle-check" />
+            <div class="circle-img-wrap"><img src="assets/food_ga_ran.png" alt="Ga ran" /><div class="check-overlay">&#10003;</div></div>
+          </label>
+          <span class="item-name">Ga ran</span>
+        </div>
+      </div>
+      <button class="btn btn-next" id="btn-step5-next" onclick="goTo(6)">Tiep UWU</button>
+    </div>
+  </section>
+
+  <!-- STEP 6 (was 5) -->
+  <section class="step" id="step-6">
+    <div class="step-inner">
+      <h2 class="main-title">An trang mieng</h2>
+      <div class="circle-grid" id="dessert-grid">
+        <div class="circle-item" data-val="Kem">
+          <label class="circle-label" for="des-1">
+            <input type="checkbox" id="des-1" class="circle-check" />
+            <div class="circle-img-wrap"><img src="assets/dessert_kem.png" alt="Kem" /><div class="check-overlay">&#10003;</div></div>
+          </label>
+          <span class="item-name">Kem</span>
+        </div>
+        <div class="circle-item" data-val="Banh ca">
+          <label class="circle-label" for="des-2">
+            <input type="checkbox" id="des-2" class="circle-check" />
+            <div class="circle-img-wrap"><img src="assets/dessert_banh_ca.png" alt="Banh ca" /><div class="check-overlay">&#10003;</div></div>
+          </label>
+          <span class="item-name">Banh ca</span>
+        </div>
+        <div class="circle-item" data-val="Che">
+          <label class="circle-label" for="des-3">
+            <input type="checkbox" id="des-3" class="circle-check" />
+            <div class="circle-img-wrap"><img src="assets/dessert_che.png" alt="Che" /><div class="check-overlay">&#10003;</div></div>
+          </label>
+          <span class="item-name">Che</span>
+        </div>
+
+        <div class="circle-item" data-val="Ta tua">
+          <label class="circle-label" for="des-5">
+            <input type="checkbox" id="des-5" class="circle-check" />
+            <div class="circle-img-wrap"><img src="assets/dessert_tra_sua.png" alt="Ta tua" /><div class="check-overlay">&#10003;</div></div>
+          </label>
+          <span class="item-name">Ta tuaaa</span>
+        </div>
+        <div class="circle-item" data-val="Tau hu">
+          <label class="circle-label" for="des-6">
+            <input type="checkbox" id="des-6" class="circle-check" />
+            <div class="circle-img-wrap"><img src="assets/dessert_tau_hu.png" alt="Tau hu" /><div class="check-overlay">&#10003;</div></div>
+          </label>
+          <span class="item-name">Tau hu</span>
+        </div>
+      </div>
+      <button class="btn btn-next" id="btn-step6-next" onclick="goTo(7)">Nop UWU</button>
+    </div>
+  </section>
+
+  <!-- STEP 7 (was 6) -->
+  <section class="step" id="step-7">
+    <div class="step-inner">
+      <h2 class="main-title">Em muon chung ta dii dauuu</h2>
+      <div class="circle-grid" id="activity-grid">
+
+        <div class="circle-item" data-val="Tro choi">
+          <label class="circle-label" for="act-2">
+            <input type="checkbox" id="act-2" class="circle-check" />
+            <div class="circle-img-wrap"><img src="assets/act_tro_choi.png" alt="Tro choi" /><div class="check-overlay">&#10003;</div></div>
+          </label>
+          <span class="item-name">Tro choi</span>
+        </div>
+        <div class="circle-item" data-val="Xem phim">
+          <label class="circle-label" for="act-3">
+            <input type="checkbox" id="act-3" class="circle-check" />
+            <div class="circle-img-wrap"><img src="assets/act_xem_phim.png" alt="Xem phim" /><div class="check-overlay">&#10003;</div></div>
+          </label>
+          <span class="item-name">Xem phim</span>
+        </div>
+        <div class="circle-item" data-val="To tuong">
+          <label class="circle-label" for="act-4">
+            <input type="checkbox" id="act-4" class="circle-check" />
+            <div class="circle-img-wrap"><img src="assets/act_to_tuong.png" alt="To tuong" /><div class="check-overlay">&#10003;</div></div>
+          </label>
+          <span class="item-name">To tuong</span>
+        </div>
+        <div class="circle-item" data-val="Cong vien">
+          <label class="circle-label" for="act-5">
+            <input type="checkbox" id="act-5" class="circle-check" />
+            <div class="circle-img-wrap"><img src="assets/act_cong_vien.png" alt="Cong vien" /><div class="check-overlay">&#10003;</div></div>
+          </label>
+          <span class="item-name">Cong vien</span>
+        </div>
+        <div class="circle-item" data-val="Dao pho">
+          <label class="circle-label" for="act-6">
+            <input type="checkbox" id="act-6" class="circle-check" />
+            <div class="circle-img-wrap"><img src="assets/act_dao_pho.png" alt="Dao pho" /><div class="check-overlay">&#10003;</div></div>
+          </label>
+          <span class="item-name">Dao pho</span>
+        </div>
+      </div>
+      <button class="btn btn-next" id="btn-step7-next" onclick="goTo(8)">Ket Thuc</button>
+    </div>
+  </section>
+
+  <!-- STEP 8 (was 7) -->
+  <section class="step" id="step-8">
+    <div class="step-inner ending-wrap">
+      <h2 class="main-title ending-title" id="ending-title">Hen em o buoi toi hom day nho</h2>
+      <p class="ending-sub" id="ending-sub">Cam on emmm Moazzz Moazz</p>
+      <div class="flower-vase" id="flower-vase">
+        <svg viewBox="0 0 300 380" xmlns="http://www.w3.org/2000/svg" class="flower-svg">
+          <path d="M110 280 Q105 340 100 360 Q150 370 200 360 Q195 340 190 280 Z" fill="#4ECDC4" opacity="0.85"/>
+          <path d="M110 280 Q120 270 150 268 Q180 270 190 280" stroke="#45B7AA" fill="none" stroke-width="3"/>
+          <ellipse cx="150" cy="280" rx="42" ry="10" fill="#3DBDB5" opacity="0.6"/>
+          <line x1="150" y1="275" x2="150" y2="155" stroke="#5B8A5B" stroke-width="5" stroke-linecap="round"/>
+          <line x1="150" y1="260" x2="115" y2="175" stroke="#5B8A5B" stroke-width="4" stroke-linecap="round"/>
+          <line x1="150" y1="255" x2="185" y2="190" stroke="#5B8A5B" stroke-width="4" stroke-linecap="round"/>
+          <ellipse cx="104" cy="222" rx="22" ry="11" fill="#7DC47D" transform="rotate(-40 104 222)"/>
+          <ellipse cx="196" cy="237" rx="22" ry="11" fill="#7DC47D" transform="rotate(40 196 237)"/>
+          <g class="flower flower-1">
+            <ellipse cx="150" cy="108" rx="14" ry="20" fill="#F0809A" transform="rotate(0 150 140)"/>
+            <ellipse cx="150" cy="108" rx="14" ry="20" fill="#F0809A" transform="rotate(45 150 140)"/>
+            <ellipse cx="150" cy="108" rx="14" ry="20" fill="#F0809A" transform="rotate(90 150 140)"/>
+            <ellipse cx="150" cy="108" rx="14" ry="20" fill="#F0809A" transform="rotate(135 150 140)"/>
+            <ellipse cx="150" cy="108" rx="14" ry="20" fill="#F0809A" transform="rotate(180 150 140)"/>
+            <ellipse cx="150" cy="108" rx="14" ry="20" fill="#F0809A" transform="rotate(225 150 140)"/>
+            <ellipse cx="150" cy="108" rx="14" ry="20" fill="#F0809A" transform="rotate(270 150 140)"/>
+            <ellipse cx="150" cy="108" rx="14" ry="20" fill="#F0809A" transform="rotate(315 150 140)"/>
+            <circle cx="150" cy="140" r="12" fill="#F7C4CE"/>
+          </g>
+          <g class="flower flower-2">
+            <ellipse cx="112" cy="160" rx="11" ry="17" fill="#BF8CD4" transform="rotate(0 112 175)"/>
+            <ellipse cx="112" cy="160" rx="11" ry="17" fill="#BF8CD4" transform="rotate(60 112 175)"/>
+            <ellipse cx="112" cy="160" rx="11" ry="17" fill="#BF8CD4" transform="rotate(120 112 175)"/>
+            <ellipse cx="112" cy="160" rx="11" ry="17" fill="#BF8CD4" transform="rotate(180 112 175)"/>
+            <ellipse cx="112" cy="160" rx="11" ry="17" fill="#BF8CD4" transform="rotate(240 112 175)"/>
+            <ellipse cx="112" cy="160" rx="11" ry="17" fill="#BF8CD4" transform="rotate(300 112 175)"/>
+            <circle cx="112" cy="175" r="9" fill="#E8D4F0"/>
+          </g>
+          <g class="flower flower-3">
+            <ellipse cx="188" cy="175" rx="11" ry="17" fill="#9B59B6" transform="rotate(0 188 190)"/>
+            <ellipse cx="188" cy="175" rx="11" ry="17" fill="#9B59B6" transform="rotate(60 188 190)"/>
+            <ellipse cx="188" cy="175" rx="11" ry="17" fill="#9B59B6" transform="rotate(120 188 190)"/>
+            <ellipse cx="188" cy="175" rx="11" ry="17" fill="#9B59B6" transform="rotate(180 188 190)"/>
+            <ellipse cx="188" cy="175" rx="11" ry="17" fill="#9B59B6" transform="rotate(240 188 190)"/>
+            <ellipse cx="188" cy="175" rx="11" ry="17" fill="#9B59B6" transform="rotate(300 188 190)"/>
+            <circle cx="188" cy="190" r="9" fill="#D4A0E8"/>
+          </g>
+        </svg>
+      </div>
+      <div class="summary-box" id="summary-box">
+        <p id="summary-date"></p>
+        <p id="summary-address"></p>
+        <p id="summary-food"></p>
+        <p id="summary-dessert"></p>
+        <p id="summary-activity"></p>
+      </div>
+      <div class="hearts-container" id="hearts-container"></div>
+    </div>
+  </section>
+
+  <div class="progress-dots" id="progress-dots">
+    <span class="dot active" data-step="1"></span>
+    <span class="dot" data-step="2"></span>
+    <span class="dot" data-step="3"></span>
+    <span class="dot" data-step="4"></span>
+    <span class="dot" data-step="5"></span>
+    <span class="dot" data-step="6"></span>
+    <span class="dot" data-step="7"></span>
+    <span class="dot" data-step="8"></span>
+  </div>
+  <canvas id="confetti-canvas"></canvas>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+# Python helper scripts & temporary video
+*.mp4
+*.py
+__pycache__/
